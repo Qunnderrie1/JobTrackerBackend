@@ -13,7 +13,7 @@ dotenv.config();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors({
-    origin: "*",
+    origin: "https://jobtrackerwebapp.onrender.com/",
 }));
 app.use(cookieParser());
 //Routes

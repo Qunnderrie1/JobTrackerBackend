@@ -9,19 +9,27 @@ export const loginUser = async (req, res) => {
 
     const { password, email } = req.body
 
+    try {
 
-    const user = await User.findOne({ email })
+        const user = await User.findOne({ email })
 
-    // Make sure no user exit with the same email
-    if (user && (await bcrypt.compare(password, user.password))) {
-        const token = generateToken(user._id);
-        res.cookie('token', token, { httpOnly: true })
-        res.json(user)
+        // Make sure no user exit with the same email
+        if (user && (await bcrypt.compare(password, user.password))) {
+            const token = generateToken(user._id);
+            res.cookie('token', token, { httpOnly: true })
+            res.json(user)
 
 
-    } else {
-        res.status(401).json({ message: "Invalid crendentails" })
+        } else {
+            res.status(401).json({ message: "Invalid crendentials" })
+        }
+
+    } catch (error) {
+
+        res.json({ erroMsg: "Failed to login user." })
+
     }
+
 
 
 }
