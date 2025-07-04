@@ -12,14 +12,13 @@ dotenv.config();
 const allowedOrigins = ["https://jobtrackerwebapp.onrender.com", "https://jobtrackerwebapp.onrender.com/"]
 
 // Middleware 
+app.use(cors({ origin: allowedOrigins, credentials: true }));
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookieParser());
-app.use(cors({
-    origin: allowedOrigins,
-    credentials: true
 
-}));
+
+
 //Routes
 app.use('/jobs', JobRoutes);
 app.use('/user', userRoutes);
