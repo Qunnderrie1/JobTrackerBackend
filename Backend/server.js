@@ -12,7 +12,9 @@ dotenv.config();
 // Middleware 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "*",
+}));
 app.use(cookieParser());
 //Routes
 app.use('/jobs', JobRoutes);
