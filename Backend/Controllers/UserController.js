@@ -9,6 +9,7 @@ export const loginUser = async (req, res) => {
 
     const { password, email } = req.body
 
+
     const user = await User.findOne({ email })
 
     // Make sure no user exit with the same email
@@ -21,7 +22,7 @@ export const loginUser = async (req, res) => {
     } else {
         res.status(401).json({ message: "Invalid crendentails" })
     }
-    res
+
 
 }
 

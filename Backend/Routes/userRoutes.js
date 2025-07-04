@@ -11,7 +11,7 @@ const router = express.Router();
 
 // User Login Route
 // POST Method
-router.post('/', loginUser)
+router.post('/login', loginUser)
 
 // Create new user
 //POST Method

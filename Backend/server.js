@@ -12,9 +12,7 @@ dotenv.config();
 // Middleware 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors({
-    origin: "*",
-}));
+app.use(cors());
 app.use(cookieParser());
 //Routes
 app.use('/jobs', JobRoutes);
@@ -25,7 +23,7 @@ app.use('/user', userRoutes);
 connectDB();
 
 
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT
 
 
 app.listen(PORT, () => {
