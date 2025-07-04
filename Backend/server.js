@@ -9,11 +9,13 @@ const app = express();
 dotenv.config();
 
 
+const allowedOrigins = ["https://jobtrackerwebapp.onrender.com", "https://jobtrackerwebapp.onrender.com/"]
+
 // Middleware 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors({
-    origin: "https://jobtrackerwebapp.onrender.com/",
+    origin: allowedOrigins,
     credentials: true
 
 }));
