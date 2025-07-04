@@ -21,8 +21,6 @@ export const loginUser = async (req, res) => {
         // Generate token
         const token = generateToken(user._id)
 
-        console.log('Incoming token' + token)
-
         // Set token in HTTP-only cookie
         res.cookie('token', token, {
             httpOnly: true,

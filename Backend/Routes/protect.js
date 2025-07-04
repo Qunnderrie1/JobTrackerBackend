@@ -8,7 +8,7 @@ const protect = async (req, res, next) => {
     try {
         //Get the token from the cookie
         const token = req.cookies.token
-        console.log('Backend token' + token)
+        console.log('Backend token ' + token)
         if (!token) {
             return res.status(401).json({ message: "No Token Provided!" })
         }
