@@ -7,14 +7,11 @@ const protect = async (req, res, next) => {
 
     //Get the token from the cookie
     let token;
-
-
     try {
 
         token = req.cookies.token
-        console.log(token)
         if (!token) {
-            return res.status(401).json({ message: "Unauthorized" })
+            return res.status(401).json({ message: "No Token Provided!" })
         }
         // Verify token
         const decode = jwt.verify(token, process.env.JWT_SECERT)
@@ -27,6 +24,8 @@ const protect = async (req, res, next) => {
         console.log("Invailed Token")
 
     }
+
+    console.log(token)
 
 
 
