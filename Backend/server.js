@@ -14,12 +14,12 @@ const allowedOrigins = ["https://jobtrackerwebapp.onrender.com", "https://jobtra
 // Middleware 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors({
     origin: allowedOrigins,
     credentials: true
 
 }));
-app.use(cookieParser());
 //Routes
 app.use('/jobs', JobRoutes);
 app.use('/user', userRoutes);
