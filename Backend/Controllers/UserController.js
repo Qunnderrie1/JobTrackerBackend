@@ -16,7 +16,13 @@ export const loginUser = async (req, res) => {
         // Make sure no user exit with the same email
         if (user && (await bcrypt.compare(password, user.password))) {
             const token = generateToken(user._id);
-            res.cookie('token', token, { httpOnly: true })
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "None",
+                maxAge: 24 * 60 * 60 * 1000
+
+            })
             res.json(user)
 
 
