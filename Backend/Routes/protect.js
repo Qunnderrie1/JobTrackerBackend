@@ -5,23 +5,26 @@ import { User } from '../Models/UserModel.js'
 
 const protect = async (req, res, next) => {
 
-    //Get the token from the cookie
-    let token;
     try {
-
-        token = req.cookies.token
+        //Get the token from the cookie
+        const token = req.cookies.token
         if (!token) {
             return res.status(401).json({ message: "No Token Provided!" })
         }
         // Verify token
-        const decode = jwt.verify(token, process.env.JWT_SECERT)
+        const decode = jwt.verify(token, process.env.JWT_SECRET)
         // Get user from token
         req.user = await User.findById(decode.userId).select('-password')
-        next()
+
+        if (!req.user) {
+            return res.status(404).json({ message: "User not found" })
+        }
+
+        next();
 
     } catch (error) {
-
-        console.log("Invailed Token")
+        console.error('Invalid token:' + error.message);
+        return res.status(401).json({ message: "Invalid or expired token" })
 
     }
 

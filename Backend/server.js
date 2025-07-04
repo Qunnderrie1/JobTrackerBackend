@@ -8,6 +8,8 @@ import cookieParser from 'cookie-parser';
 const app = express();
 dotenv.config();
 
+// Connect to database
+connectDB();
 
 const allowedOrigins = ["https://jobtrackerwebapp.onrender.com", "https://jobtrackerwebapp.onrender.com/"]
 
@@ -18,14 +20,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
-
 //Routes
 app.use('/jobs', JobRoutes);
 app.use('/user', userRoutes);
-
-
-// Connect to database
-connectDB();
 
 
 const PORT = process.env.PORT || 5000

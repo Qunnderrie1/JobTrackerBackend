@@ -13,26 +13,33 @@ export const loginUser = async (req, res) => {
 
         const user = await User.findOne({ email })
 
-        // Make sure no user exit with the same email
-        if (user && (await bcrypt.compare(password, user.password))) {
-            const token = generateToken(user._id);
-            res.cookie('token', token, {
-                httpOnly: true,
-                secure: true,
-                sameSite: "None",
-                maxAge: 24 * 60 * 60 * 1000
-
-            })
-            res.json(user)
-
-
-        } else {
-            res.status(401).json({ message: "Invalid crendentials" })
+        // Check if user exits and password is correct
+        if (!user && !(await bcrypt.compare(password, user.password))) {
+            return res.status(401).json({ message: "Invalid credentials" })
         }
 
-    } catch (error) {
+        // Generate token
+        const token = generateToken(user._id)
 
-        res.json({ erroMsg: "Failed to login user." })
+        // Set token in HTTP-only cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: "None",
+            maxAge: 24 * 60 * 60 * 1000
+
+        })
+        // Send user data
+        res.json({
+            _id: user._id,
+            username: user.username,
+            email: user.email
+        })
+
+
+    } catch (error) {
+        console.error("Login Error" + error.message)
+        res.status(500).json({ message: "Server error while loggin in" })
 
     }
 
