@@ -11,10 +11,10 @@ dotenv.config();
 // Connect to database
 connectDB();
 
-const allowedOrigins = ["https://jobtrackerwebapp.onrender.com", "https://jobtrackerwebapp.onrender.com/"]
+const allowedOrigin = ["https://jobtrackerwebapp.onrender.com"]
 
 // Middleware 
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+app.use(cors({ origin: allowedOrigin, credentials: true }));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

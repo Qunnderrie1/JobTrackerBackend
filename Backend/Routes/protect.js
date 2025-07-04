@@ -5,6 +5,10 @@ import { User } from '../Models/UserModel.js'
 
 const protect = async (req, res, next) => {
 
+    console.log('request from brower ' + req)
+    console.log('Cookies ' + req.cookies)
+    console.log('Token from cookie ' + req.cookies.token)
+
     try {
         //Get the token from the cookie
         const token = req.cookies.token
