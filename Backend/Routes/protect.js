@@ -7,6 +7,8 @@ const protect = async (req, res, next) => {
     //Get the token from the cookie
     const token = req.cookies.token
 
+    console.log('Token ' + req.headers)
+
     console.log('Token from cookie ' + req.cookies.token)
 
     if (!token) {
@@ -18,6 +20,7 @@ const protect = async (req, res, next) => {
 
         // Verify token
         const decode = jwt.verify(token, process.env.JWT_SECRET)
+
         // Get user from token
         req.user = await User.findById(decode.userId).select('-password')
 
