@@ -6,11 +6,12 @@ import { User } from '../Models/UserModel.js'
 const protect = async (req, res, next) => {
 
     console.log('Token from cookie ' + req.cookies.token)
+    console.log('Token ' + req.cookies)
+    console.log('request ' + req)
 
     try {
         //Get the token from the cookie
         const token = req.cookies.token
-        console.log('Backend token ' + token)
         if (!token) {
             return res.status(401).json({ message: "No Token Provided!" })
         }

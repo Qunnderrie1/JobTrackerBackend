@@ -14,8 +14,8 @@ connectDB();
 const allowedOrigin = ["https://jobtrackerwebapp.onrender.com"]
 
 // Middleware 
-app.use(cors({ origin: allowedOrigin, credentials: true }));
 app.use(cookieParser());
+app.use(cors({ origin: allowedOrigin, credentials: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
