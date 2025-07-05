@@ -9,8 +9,6 @@ const protect = async (req, res, next) => {
 
     console.log('Token from cookie ' + req.cookies.token)
 
-    console.log(process.env.JWT_SECRET)
-
     if (!token) {
         return res.status(401).json({ message: "No Token Provided!" })
     }
