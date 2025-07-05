@@ -10,10 +10,9 @@ export const allJobs = async (req, res) => {
         res.json(allJobs)
 
     } catch (error) {
-        console.log(error)
-
+        return res.status(402).json({ message: "Failed to get user jobs " + error.message })
     }
-    res.end();
+
 }
 export const getJobByID = async (req, res) => {
 
@@ -22,13 +21,12 @@ export const getJobByID = async (req, res) => {
     try {
         const byIdJobs = await Job.find({ _id: id });
         res.send(byIdJobs)
-        console.log(byIdJobs)
 
     } catch (error) {
-        console.log(error)
+        return res.status(402).json({ message: "Failed to get user jobs " + error.message })
 
     }
-    res.end();
+
 }
 export const createJob = async (req, res) => {
 
@@ -48,10 +46,10 @@ export const createJob = async (req, res) => {
         res.send(newJob)
 
     } catch (error) {
-        console.log(error)
+        return res.status(402).json({ message: "Failed to get user jobs " + error.message })
 
     }
-    res.end();
+
 }
 export const updateJob = async (req, res) => {
 
@@ -63,7 +61,7 @@ export const updateJob = async (req, res) => {
     } catch (error) {
         res.status(401).json({ errorMsg: "Failed to update job" })
     }
-    res.end();
+
 }
 export const deleteJob = async (req, res) => {
     const { id } = req.params
@@ -73,7 +71,7 @@ export const deleteJob = async (req, res) => {
 
     } catch (error) {
         res.json({ Msg: "Failed to delete job" }).status(401)
-        console.log(error)
+
     }
-    res.end();
+
 }
